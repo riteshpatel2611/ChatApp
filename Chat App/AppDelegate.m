@@ -33,6 +33,8 @@
     
     // Enable push notifications
      [self registerForRemoteNotification];
+    
+    // get all phone contacts of user
     [[ContactList sharedContacts] fetchAllContacts];
     NSArray *array = [[ContactList sharedContacts] totalPhoneNumberArray];
     return YES;
