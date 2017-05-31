@@ -332,7 +332,7 @@ typedef enum : NSUInteger {
     NSString *uniqueUUID = GETUNIQUEUUID;
     if (uniqueUUID == nil) {
         uniqueUUID = [self.xmppStream generateUUID];
-        uniqueUUID = [@"xplor-" stringByAppendingString:uniqueUUID];
+        uniqueUUID = [@"ChatApp-" stringByAppendingString:uniqueUUID];
         [[NSUserDefaults standardUserDefaults] setObject:uniqueUUID forKey:UNIQUEUUID];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }

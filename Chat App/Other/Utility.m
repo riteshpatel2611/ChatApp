@@ -19,8 +19,7 @@
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage new]
 //                                       forBarMetrics:UIBarMetricsDefault];
 //    [UINavigationBar appearance].shadowImage = [UIImage new];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
-                                                         forBarMetrics:UIBarMetricsDefault];
+//
 }
 
 + (void)setNavigationBarThemeForContactsUI{

@@ -19,8 +19,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
-//    [self.navigationItem setLeftBarButtonItem:btnBack];
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    [self.navigationItem setLeftBarButtonItem:btnBack];
+
     self.title = @"Creative minds";
 
     
