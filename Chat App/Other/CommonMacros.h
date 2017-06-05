@@ -32,6 +32,7 @@ static NSString *kNotificationUpdateBuddyPresence                   = @"kNotific
 #define FONT_ROBOTO_BOLD            @"Roboto-Bold"
 #define FONT_ROBOTO_MEDIUM          @"Roboto-Mediun"
 
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
 #define STORYBOARD         [UIStoryboard storyboardWithName:@"Main" bundle: nil]

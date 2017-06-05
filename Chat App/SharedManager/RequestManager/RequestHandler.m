@@ -62,11 +62,9 @@
     
     NSURLRequest *request = [RequestHandler generateJSONURLRequestParams:[RequestHandler generateJSONForDictionary:params]];
     
-    NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error) {
-//        NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//        NSLog(@"dataString-->%@",dataString);
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
         if (data.length > 0 && error == nil) {
             
             error = nil;
@@ -83,6 +81,8 @@
             completionBlock(NO, error.userInfo);
         }
     }];
+    
+    [task resume];
 }
 
 - (void)uploadImage:(UIImage *)img Handler:(void (^)(BOOL, NSData *))completionBlock {
@@ -120,45 +120,56 @@
     [request addValue:[NSString stringWithFormat:@"%lu", (unsigned long)[body length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:body];
     
-    NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (error == nil) {
+            completionBlock(YES, data);
+        } else {
+            
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                if (error == nil) {
+                    
+                    completionBlock(YES, data);
+                    
+                } else {
+                    
+                    NSURLSession *session = [NSURLSession sharedSession];
+                    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        
+                        if (error == nil) {
+                            completionBlock(YES, data);
+                        } else {
+                            
+                            NSURLSession *session = [NSURLSession sharedSession];
+                            NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                
+                                if (error == nil) {
+                                    completionBlock(YES, data);
+                                } else {
+                                    
+                                    completionBlock(NO, nil);
+                                }
+                                
+                            }];
+                            
+                            [task resume];
+                        }
+
+                    }];
+            
+                    [task resume];
+                }
+            }];
+        
+            [task resume];
+        }
+    }];
     
-    [NSURLConnection sendAsynchronousRequest:request
-						   queue:operationQueue
-				   completionHandler:
-     ^(NSURLResponse *response, NSData *data, NSError *error) {
-	   
-	   if (error == nil) {
-		 completionBlock(YES, data);
-	   } else {
-		 
-           [NSURLConnection sendAsynchronousRequest:request
-								queue:operationQueue
-						completionHandler:
-		  ^(NSURLResponse *response, NSData *data, NSError *error) {
-			
-			if (error == nil) {
-			    
-			    completionBlock(YES, data);
-			    
-			} else {
-			   
-			    [NSURLConnection sendAsynchronousRequest:request
-									   queue:operationQueue
-							   completionHandler:
-			     ^(NSURLResponse *response, NSData *data, NSError *error) {
-				   
-				   if (error == nil) {
-					 completionBlock(YES, data);
-				   } else {
-					 
-					 completionBlock(NO, nil);
-				   }
-				   
-			     }];
-			}
-		  }];
-	   }
-     }];
+    [task resume];
+    
 }
 
 - (void)uploadImage:(NSDictionary *)fileDetail withParameters:(NSDictionary *)params  Handler:(void (^)(BOOL, NSDictionary *))completionBlock{
@@ -204,29 +215,27 @@
     [request addValue:[NSString stringWithFormat:@"%lu", (unsigned long)[body length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:body ];
     
-    NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (data.length > 0 && error == nil) {
+            
+            error = nil;
+            NSDictionary *rootObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (rootObject) {
+                    completionBlock(YES, rootObject);
+                } else {
+                    completionBlock(NO, error.userInfo);
+                }
+            });
+        } else {
+            completionBlock(NO, error.userInfo);
+        }
+    }];
     
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:operationQueue
-                           completionHandler:
-     ^(NSURLResponse *response, NSData *data, NSError *error) {
-         
-         if (data.length > 0 && error == nil) {
-             
-             error = nil;
-             NSDictionary *rootObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 if (rootObject) {
-                     completionBlock(YES, rootObject);
-                 } else {
-                     completionBlock(NO, error.userInfo);
-                 }
-             });
-         } else {
-             completionBlock(NO, error.userInfo);
-         }
-     }];
+    [task resume];
 }
 
 //+ (void)startSyncPendingMessages {
@@ -317,10 +326,10 @@
 - (void)sendRequestWithParams:(NSMutableDictionary *)params handler:(void (^)(BOOL, NSDictionary *))completionBlock {
     
     NSURLRequest *request = [RequestHandler generateJSONURLRequestParams:[RequestHandler generateJSONForDictionary:params]];
-    NSOperationQueue *operationQueue = [NSOperationQueue mainQueue];
     
-    [NSURLConnection sendAsynchronousRequest:request queue:operationQueue completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error) {
-        
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
         if (data.length > 0 && error == nil) {
             
             error = nil;
@@ -337,6 +346,8 @@
             completionBlock(NO, error.userInfo);
         }
     }];
+    
+    [task resume];
 }
 
 @end

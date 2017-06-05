@@ -23,6 +23,8 @@
     // Navigation bar
     [self.navigationController setNavigationBarHidden:NO];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+
     UIBarButtonItem *btnMenu = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonPressed)];
     UIBarButtonItem *btnNewChat = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"edit"] style:UIBarButtonItemStylePlain target:self action:@selector(onClickNewChat)];
     [self.navigationItem setLeftBarButtonItem:btnMenu];

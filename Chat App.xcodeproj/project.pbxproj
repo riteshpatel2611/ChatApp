@@ -244,6 +244,8 @@
 		52EA3EAB1ED2E84F00B3C294 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52EA3E9C1ED2E84E00B3C294 /* IQKeyboardManager.bundle */; };
 		52EA3EAF1ED2ED3A00B3C294 /* ChatAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EA3EAE1ED2ED3A00B3C294 /* ChatAsyncImageView.m */; };
 		52EA3EB21ED2ED6900B3C294 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 52EA3EB11ED2ED6900B3C294 /* ImageCache.m */; };
+		52ECD09F1EE5327E00F4FA1F /* GroupDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ECD09E1EE5327E00F4FA1F /* GroupDetailVC.m */; };
+		52ECD0A31EE5336100F4FA1F /* GroupDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ECD0A21EE5336100F4FA1F /* GroupDetailCell.m */; };
 		52ED8C8D1EDC1C4400BCBC7C /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED8C8B1EDC1C4400BCBC7C /* Contacts.framework */; };
 		52ED8C8E1EDC1C4400BCBC7C /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52ED8C8C1EDC1C4400BCBC7C /* ContactsUI.framework */; };
 		52F86C991EDD34BE00F7BB88 /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 52F86C981EDD34BE00F7BB88 /* countries.json */; };
@@ -727,6 +729,10 @@
 		52EA3EB11ED2ED6900B3C294 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		52EA3EB31ED2EECE00B3C294 /* CommonMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMethods.h; sourceTree = "<group>"; };
 		52EA3EB41ED2EF1D00B3C294 /* AlertMessages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertMessages.h; sourceTree = "<group>"; };
+		52ECD09D1EE5327E00F4FA1F /* GroupDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailVC.h; sourceTree = "<group>"; };
+		52ECD09E1EE5327E00F4FA1F /* GroupDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailVC.m; sourceTree = "<group>"; };
+		52ECD0A11EE5336100F4FA1F /* GroupDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupDetailCell.h; sourceTree = "<group>"; };
+		52ECD0A21EE5336100F4FA1F /* GroupDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDetailCell.m; sourceTree = "<group>"; };
 		52ED8C8B1EDC1C4400BCBC7C /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		52ED8C8C1EDC1C4400BCBC7C /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		52F1084E1ED593860020660C /* Chat App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Chat App.entitlements"; sourceTree = "<group>"; };
@@ -2049,6 +2055,7 @@
 		52630EAE1ECC4DB0006E48A8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				52ECD09C1EE5325600F4FA1F /* GroupDetail */,
 				5272B9231ECEF104004FF69E /* Chat */,
 				5272B9371ECF1DC7004FF69E /* New Group Chat */,
 				5272B92E1ECEFDB1004FF69E /* NewChat */,
@@ -2338,6 +2345,25 @@
 			path = AsyncImageView;
 			sourceTree = "<group>";
 		};
+		52ECD09C1EE5325600F4FA1F /* GroupDetail */ = {
+			isa = PBXGroup;
+			children = (
+				52ECD0A01EE5334900F4FA1F /* Cell */,
+				52ECD09D1EE5327E00F4FA1F /* GroupDetailVC.h */,
+				52ECD09E1EE5327E00F4FA1F /* GroupDetailVC.m */,
+			);
+			name = GroupDetail;
+			sourceTree = "<group>";
+		};
+		52ECD0A01EE5334900F4FA1F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52ECD0A11EE5336100F4FA1F /* GroupDetailCell.h */,
+				52ECD0A21EE5336100F4FA1F /* GroupDetailCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		52F86C971EDD34AA00F7BB88 /* Countries */ = {
 			isa = PBXGroup;
 			children = (
@@ -2454,6 +2480,7 @@
 				52187D5C1ED3FDEB00693154 /* XMPPIQ.m in Sources */,
 				52187DC61ED3FDEB00693154 /* XMPPMessage+XEP_0280.m in Sources */,
 				52187D951ED3FDEB00693154 /* XMPPvCardTempTel.m in Sources */,
+				52ECD0A31EE5336100F4FA1F /* GroupDetailCell.m in Sources */,
 				52187D8F1ED3FDEB00693154 /* XMPPvCardTempAdr.m in Sources */,
 				52187DD11ED3FDEB00693154 /* XMPPSlot.m in Sources */,
 				52187DBD1ED3FDEB00693154 /* XMPPStreamManagement.m in Sources */,
@@ -2571,6 +2598,7 @@
 				52187D6C1ED3FDEB00693154 /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				52187D9D1ED3FDEB00693154 /* XMPPPubSub.m in Sources */,
 				52187DDB1ED3FDEB00693154 /* XMPPSRVResolver.m in Sources */,
+				52ECD09F1EE5327E00F4FA1F /* GroupDetailVC.m in Sources */,
 				52187D6F1ED3FDEB00693154 /* XMPPUserCoreDataStorageObject.m in Sources */,
 				52187DD41ED3FDEB00693154 /* XMPPRoomLightMessageCoreDataStorageObject.m in Sources */,
 				52187D971ED3FDEB00693154 /* XMPPSearchNode.m in Sources */,

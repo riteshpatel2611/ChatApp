@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
 #import "ContactList.h"
-#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
